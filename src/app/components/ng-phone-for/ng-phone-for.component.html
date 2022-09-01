@@ -1,0 +1,19 @@
+<div class="row row-cols-3 mt-5">
+  <div class="col" *ngFor="let phone of phones">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5">
+            <img src="{{ phone.image }}" alt="" class="img-fluid" />
+          </div>
+          <div class="col-7">
+            <h5 class="mb-3">{{ phone.title }}</h5>
+            <p>ID: {{ phone.id }}</p>
+            <p>Price: {{ phone.price }}</p>
+            <p>In stock: {{ phone.numberInStock }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

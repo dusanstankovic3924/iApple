@@ -1,0 +1,71 @@
+<app-phone-form
+  (onAddEvent)="onAddPhone($event)"
+  (onUpdateEvent)="onUpdatePhone($event)"
+></app-phone-form>
+
+<!-- Search -->
+<h5 class="mt-5">Search</h5>
+<form>
+  <input
+    type="text"
+    name="search"
+    class="form-control"
+    placeholder="Type title here..."
+    [(ngModel)]="this.searchValue"
+  />
+</form>
+
+<div class="row row-cols-3 mt-5">
+  <div class="col" *ngFor="let phone of phones | filter: this.searchValue">
+    <div
+      class="card shadow"
+      [ngClass]="{
+        'bg-secondary': this.selectedPhone === phone
+      }"
+    >
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5">
+            <img src="{{ phone.image }}" alt="" class="img-fluid" />
+          </div>
+          <div class="col-7">
+            <h5 class="mb-3">{{ phone.title }}</h5>
+            <p>ID: {{ phone.id }}</p>
+            <p>Price: {{ phone.price | currency: "EUR" }}</p>
+            <p>In stock: {{ phone.numberInStock }}</p>
+            <div class="row mt-4">
+              <div class="col-auto">
+                <button
+                  (click)="onSelect(phone)"
+                  class="btn btn-sm btn-primary"
+                >
+                  Edit
+                </button>
+              </div>
+              <div class="col-auto ms-auto">
+                <button
+                  (click)="onDeletePhone(phone)"
+                  class="btn btn-sm btn-outline-danger"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col">
+                <div class="d-grid">
+                  <button
+                    (click)="onBuy(phone)"
+                    class="btn btn-sm btn-outline-success"
+                  >
+                    Buy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

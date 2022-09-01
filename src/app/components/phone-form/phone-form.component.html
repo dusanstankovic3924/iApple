@@ -1,0 +1,113 @@
+<form [formGroup]="this.phoneForm" (ngSubmit)="this.onSubmit()">
+  <input type="hidden" formControlName="id" />
+  <input type="hidden" formControlName="image" />
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      id="title"
+      class="form-control"
+      formControlName="title"
+      [ngClass]="this.validateTitle()"
+    />
+    <div class="invalid-feedback">
+      {{
+        this.phoneForm.get("title").hasError("required")
+          ? "Title is required"
+          : ""
+      }}
+    </div>
+    <div class="invalid-feedback">
+      {{
+        this.phoneForm.get("title").hasError("minlength")
+          ? "Min length is 1"
+          : ""
+      }}
+    </div>
+    <div class="valid-feedback">Correct!</div>
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <input
+      type="text"
+      id="price"
+      class="form-control"
+      formControlName="price"
+      [ngClass]="this.validatePrice()"
+    />
+
+    <div class="invalid-feedback">
+      {{
+        this.phoneForm.get("price").hasError("required")
+          ? "Price is required"
+          : ""
+      }}
+    </div>
+    <div class="invalid-feedback">
+      {{ notValidPrice() }}
+    </div>
+    <div class="invalid-feedback">
+      {{
+        this.phoneForm.get("price").hasError("pattern")
+          ? "Must be a number"
+          : ""
+      }}
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="numberInStock" class="form-label">In Stock</label>
+    <input
+      type="number"
+      id="numberInStock"
+      class="form-control"
+      formControlName="numberInStock"
+      [ngClass]="this.validateInStock()"
+    />
+    <div class="invalid-feedback">
+      {{
+        this.phoneForm.get("numberInStock").hasError("required")
+          ? "In stock is required"
+          : ""
+      }}
+    </div>
+    <div class="invalid-feedback">
+      {{
+        this.phoneForm.get("numberInStock").hasError("minlength")
+          ? "Min length is 1"
+          : ""
+      }}
+    </div>
+    <div class="invalid-feedback">
+      {{
+        this.phoneForm.get("price").hasError("pattern")
+          ? "Must be a number"
+          : ""
+      }}
+    </div>
+    <button type="button" (click)="dec()" class="btn btn-warning btn-sm me-2">
+      Manje
+    </button>
+    <button type="button" (click)="inc()" class="btn btn-warning btn-sm">
+      Više
+    </button>
+  </div>
+  <button
+    *ngIf="this.add"
+    [disabled]="!this.phoneForm.valid"
+    type="submit"
+    class="btn btn-primary me-3"
+  >
+    Add New Phone
+  </button>
+  <button
+    *ngIf="!this.add"
+    [disabled]="!this.phoneForm.valid"
+    type="submit"
+    class="btn btn-warning me-3"
+  >
+    Update Phone
+  </button>
+  <button (click)="this.clearState()" type="button" class="btn btn-dark">
+    Clear
+  </button>
+</form>
